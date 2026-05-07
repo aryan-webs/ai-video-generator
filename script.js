@@ -1,6 +1,7 @@
 document.getElementById("generateBtn").addEventListener("click", generate);
 
 async function generate() {
+
     let prompt = document.getElementById("prompt").value;
     let loading = document.getElementById("loading");
     let results = document.getElementById("results");
@@ -14,14 +15,8 @@ async function generate() {
     loading.style.display = "block";
 
     try {
-        let response = await fetch(
-            "https://api.pexels.com/videos/search?query=" + prompt + "&per_page=3",
-            {
-                headers: {
-                    Authorization: ""
-                }
-            }
-        );
+
+        let response = await fetch(`/.netlify/functions/pexels?query=${prompt}`);
 
         let data = await response.json();
 
@@ -33,14 +28,23 @@ async function generate() {
         }
 
         data.videos.forEach(video => {
+
             let vid = document.createElement("video");
+
             vid.src = video.video_files[0].link;
+
             vid.controls = true;
+
             results.appendChild(vid);
+
         });
 
     } catch (error) {
+
         loading.style.display = "none";
+
         results.innerHTML = "Something went wrong ❌";
+
     }
+
 }
