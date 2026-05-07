@@ -18,7 +18,7 @@ async function generate() {
             "https://api.pexels.com/videos/search?query=" + prompt + "&per_page=3",
             {
                 headers: {
-                    Authorization: "EpE2HZJ6G597BlK0ORm32Rt3nU2N8swXd5IzcUGijJblgy0XFuJYdAMU"
+                    Authorization: ""
                 }
             }
         );
